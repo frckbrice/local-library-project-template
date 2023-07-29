@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each bookIntance in bookinstance_list
+      li
+        a(href=bookIntance.url) #{bookIntance.book.title} : #{bookIntance.imprint} -
+        if bookIntance.status == 'Available'
+           span.text-success #{bookIntance.status}
+        else if bookIntance.status == 'Maintenance'
+           span.text-danger #{bookIntance.status}
+        else 
+            span.text-warning #{bookIntance.status}  
+        if bookIntance.status != 'Available'
+            span (Due: #{bookIntance.due_back_formatted})
+    else
+      li There are no books.

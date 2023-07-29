@@ -55,7 +55,7 @@ const BookSchema = new Schema({
     },
   ],
   author: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: "Author",
   },
 });
@@ -65,4 +65,4 @@ BookSchema.virtual("url").get(function () {
   return `catalog/book/${this._id}`;
 });
 
-module.exports = mongoose.model("book", BookSchema);
+module.exports = mongoose.model("Book", BookSchema);
