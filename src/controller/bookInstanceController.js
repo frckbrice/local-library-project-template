@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const BookInstance = require("../models/bookInstance");
 const asyncHandler = require("express-async-handler");
 
@@ -11,9 +12,26 @@ console.log(allBookInstances);
   });
 });
 
-// Display detail page for a specific BookInstance.
+//* Display detail page for a specific BookInstance.
 exports.bookinstance_detail = asyncHandler(async (req, res, next) => {
-  res.send(`NOT IMPLEMENTED: BookInstance detail: ${req.params.id}`);
+  const {id} = req.params;
+  if(mongoose.isValidObjectId(id)) {
+ const bookinstance = await BookInstance.findById(id).populate('book').orFail().exec();
+
+ if(!bookinstance) {
+  const err = new Error('No bookinstance found');
+  err.status = 404;
+  return next(err)
+ }
+
+ res.render("bookInstance_details", {
+   title: "Book Instance Details",
+   bookinstance,
+ });
+  }else {
+    console.log('Not valid ObjectId')
+  }
+ 
 });
 
 // Display BookInstance create form on GET.

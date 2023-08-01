@@ -3,7 +3,7 @@ extends layout
 block content 
 
 
-    h1 Genre: #{genre.name}
+    h1 Genre: #{Genre_name}
 
     div(style = 'largin-lef:20px;margin-top:20px')
 
@@ -15,7 +15,7 @@ block content
           dt 
 
             a(href="book.url") #{book.title}
-            
+
           dd #{book.summary} 
 
         else 

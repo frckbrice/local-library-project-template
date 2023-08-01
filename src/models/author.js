@@ -31,7 +31,7 @@ AuthorSchema.virtual("name").get(function () {
 });
 //* create virtual for author's name
 AuthorSchema.virtual("url").get(function () {
-  return `/catalog/author/${this.author}`;
+  return `/catalog/authors/${this._id}`;
 });
 
 //* virtual date formatted

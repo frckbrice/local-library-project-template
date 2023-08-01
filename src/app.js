@@ -20,10 +20,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 
+
 app.use("/", require("./routes/index"));
 app.use("/users", require("./routes/users"));
-app.use("/catalog", require("./routes/catalog")); // Add catalog routes to middleware chain.
-
+// app.use("/catalog", require("./routes/catalog")); // Add catalog routes to middleware chain.
+app.use("/catalog/genres", require("./routes/genre"));
+app.use("/catalog/books", require("./routes/book"));
+app.use("/catalog/authors", require("./routes/author"));
+app.use("/catalog/bookinstances", require("./routes/bookinstance"));
 //*MONGOOSE apply connection
 
 mongoose.set("strictQuery", false);
